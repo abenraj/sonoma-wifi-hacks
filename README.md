@@ -6,6 +6,7 @@
 Original instructions provided by OCLP team can be referenced [here](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494). 
 
 OCLP can be downloaded [here](https://github.com/dortania/OpenCore-Legacy-Patcher).
+
 ## Pre-Root Patching
 
  - SIP (System Integrity Protection) must be set to a reduced state, 0x803. In your `config.plist` make sure the following value is set under `NVRAM>Add>7C436110-AB2A-4BBB-A880-FE41995C9F82`.
@@ -19,7 +20,7 @@ OCLP can be downloaded [here](https://github.com/dortania/OpenCore-Legacy-Patche
 	- [ApECID](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#apecid) *cannot* be used with root patches, it needs to be disabled and remain disabled.
 - **Block** kext: `com.apple.iokit.IOSkywalkFamily` (reference plist: availabe [here](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/e21efa975c0cf228cb36e81a974bc6b4c27c7807/payloads/Config/config.plist#L1695-L1710), thanks OCLP team!) Make sure to set the `MinKernel` value in your plist to 23.0.0 so this is only blocked for Sonoma if you are booting multiple OS versions.
 ![Block Example](https://i.imgur.com/48bNWgo.png)
-- **Inject** kexts: [IOSkywalk.kext](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/e21efa975c0cf228cb36e81a974bc6b4c27c7807/payloads/Kexts/Wifi/IOSkywalkFamily-v1.0.0.zip), [IO80211FamilyLegacy.kext](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/e21efa975c0cf228cb36e81a974bc6b4c27c7807/payloads/Kexts/Wifi/IO80211FamilyLegacy-v1.0.0.zip) - **this one also has a child kext** `AirPortBrcmNIC.kext` make sure that is injected as well. For all three set the `MinKernel` version to 23.0.0 so they are only injected in Somona if you are booting multiple OS versions.
+- **Inject** kexts: [IOSkywalk.kext]([https://github.com/dortania/OpenCore-Legacy-Patcher/blob/e21efa975c0cf228cb36e81a974bc6b4c27c7807/payloads/Kexts/Wifi/IOSkywalkFamily-v1.0.0.zip](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Wifi)), [IO80211FamilyLegacy.kext]([https://github.com/dortania/OpenCore-Legacy-Patcher/blob/e21efa975c0cf228cb36e81a974bc6b4c27c7807/payloads/Kexts/Wifi/IO80211FamilyLegacy-v1.0.0.zip](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Wifi)) - **this one also has a child kext** `AirPortBrcmNIC.kext` make sure that is injected as well. For all three set the `MinKernel` version to 23.0.0 so they are only injected in Somona if you are booting multiple OS versions.
 ![kernel add](https://i.imgur.com/jq7Lqcf.png)
 - Once the changes have been applied, reboot, reset your NVRAM and then OpenCore Legacy Patcher should now show the option to apply root patches.
 
